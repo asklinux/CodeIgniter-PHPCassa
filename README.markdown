@@ -5,10 +5,10 @@ NOTE:	This is just a placeholder, I havn't started the development on this libra
 
 The intended usage is below:
 
-$this->load->library('cassandra');
+	$this->load->library('cassandra');
 
-$this->cassandra->get('users',$key);
-$this->cassandra->insert('users','user@domain.com',array(
+	$this->cassandra->get('users',$key);
+	$this->cassandra->insert('users','user@domain.com',array(
 														'first_name' => 'Ian',
 														'last_name'	 => 'Livingstone',
 														'password'	 => 'Some Encrypted String',
@@ -17,11 +17,11 @@ $this->cassandra->insert('users','user@domain.com',array(
 
 Then in your cassandra.php configuration file you'll add the node list and ports
 
-$cassandra['nodes'][] = array(
+	$cassandra['nodes'][] = array(
 							'hostname' 	=> '54.32.1.54',
 							'port'		=> '9000'
 						);
-$cassandra['nodes'][] = array(
+	$cassandra['nodes'][] = array(
 							'hostname'	=> 'cassandra-node-54',
 							'port'		=> '4322'
 						);
