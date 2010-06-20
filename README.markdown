@@ -1,7 +1,6 @@
 CodeIgniter-PHPCassa is an implementation of PHPCassa for CodeIgniter.
 You can find the latest version of PHPCassa at http://www.github.com/hoan/phpcassa
-NOTE:	This is just a placeholder, I havn't started the development on this library
-		just yet but plan to do so in the next couple of days.
+NOTE:	This is just a placeholder, I havn't started the development on this library just yet but plan to do so in the next couple of days.
 
 The intended usage is below:
 
