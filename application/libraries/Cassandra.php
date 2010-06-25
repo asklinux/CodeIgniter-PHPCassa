@@ -55,6 +55,95 @@ class Cassandra {
 		*	classes to create column => ColumnObject mapping
 		*	and adds the nodes to the CassandraConn static obj	
 		*/
+
+        $this->CI->config->load('cassandra', true);
+        $this->_config = $this->CI->config->item('cassandra');
+
+        foreach ($this->_config['nodes'] as $node) {
+            CassandraConn::add_node($node['hostname'], $node['port']); 
+        }
+
+        foreach ($this->_config['columns'] as $column) {
+            $this->_columns[$column['name']] = new CassandraCF($column['keyspace'],
+                                                               $column['name'],
+                                                               $column['supercolumn'],
+                                                               $column['column_type'],
+                                                               $column['subcolumn_type'],
+                                                               $column['read_consistency_level'],
+                                                               $column['write_consistency_level']);
+        }
 	}
+    
+    public function get ($col, $key, $super_column = NULL, $slice_start="", $slice_finish="", $column_reversed=False, $column_count=100) {
+        
+        /*
+        *   Get col:key value from cassandra
+        */
+
+        if (!in_array($col, $this->_column))
+            throw Exception($col." is not a valid column space; check your cassandra.php config file");
+
+        return $this->_column[$col]->get($key, $super_column, $slice_start, $slice_finish, $column_reversed, $column_count);
+    }
+
+    public function multiget ($col, $keys, $slice_start = "", $slice_finish = "") {
+        
+        /*
+        *   Multi get col:kes values from cassandra
+        */
+
+        if (!in_array($col, $this->_column))
+            throw Exception($col." is not a valid column space; check your cassandra.php config file");
+
+        return $this->_column[$col]->multiget($keys, $slice_start, $slice_finish);
+    }
+
+    public function get_count ($col, $key, $super_column = null) {
+        
+        /*
+        *   Return number of matching keys
+        */
+
+        if (!in_array($col, $this->_column))
+            throw Exception($col." is not a valid column space; check your cassandra.php config file");
+
+        return $this->_column[$col]->get_count($key, $super_column);
+    }
+
+    public function get_range($start_key="", $finish_key="", $row_count = 100, $slice_start="", $slice_finish="") {
+        
+        /*
+        *   Get Range of Keys  
+        */
+        
+        if (!in_array($col, $this->_column))
+            throw Exception($col." is not a valid column space; check your cassandra.php config file");
+
+        return $this->_column[$col]->get_range($start_key, $finish_key, $row_count, $slice_start, $slice_finish);
+    }
+
+    public funciton insert ($col, $key, $value) {
+        
+        /*
+        *   Insert column into $col space using $key and $value
+        */
+
+        if (!in_array($col, $this->_column))
+            throw Exception($col." is not a valid column space; check your cassandra.php config file");
+
+        return $this->_column[$col]->insert($key, $value);
+    }
+
+    public function remove ($col, $key, $column_name=null) {
+        
+        /*
+        *   Remove key from column space
+        */
+
+        if (!in_array($col, $this->_column))
+            throw Exception($col." is not a valid column space; check your cassandra.php config file");
+        
+        return $this->_column[$col]->remove($key, $column_name);
+    }
 }
 
