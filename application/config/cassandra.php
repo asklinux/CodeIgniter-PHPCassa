@@ -11,15 +11,15 @@
 *
 *	Example:
 *	$cassandra['nodes'][] = array(
-*								'hostname' 	=> '134.56.33.41',
-*								'port'		=> '9000'
-*							);
+*		'hostname'	=> '134.56.33.41',
+*		'port'		=> '9000'
+*	);
 */
 $cassandra['nodes'] = array();
 $cassandra['nodes'][] = array(
-							'hostname' 	=> 'localhost',
-							'port'		=> '9000'
-						);
+	'hostname'	=> 'localhost',
+	'port'		=> '9000'
+);
 
 /*
 *	List of Columns Familys
@@ -48,22 +48,22 @@ $cassandra['nodes'][] = array(
 *
 *	Example:
 *	$cassandra['columns'][] = array(
-*								'keyspace' 		            => 'Keyspace1',
-*								'name'			            => 'Users',
-*								'supercolumn'	            => true
-*                               'column_type'               => 'UTF8String',
-*                               'subcolumn_type'            => null,
-                                'read_consistency_level'    => 1,
-                                'write_consistency_level'   => 1
-                                   );
+*		'keyspace'			    => 'Keyspace1',
+*		'name'				    => 'Users',
+*		'supercolumn'		    => true
+*               'column_type'               => 'UTF8String',
+*               'subcolumn_type'            => null,
+*               'read_consistency_level'    => 1,
+*               'write_consistency_level'   => 1
+*	);
 */
 $cassandra['columns'] = array();
 $cassandra['columns'][] = array(
-							'keyspace'		            => 'ProjectOne',
-							'name'			            => 'Users',
-							'supercolumn'	            => false,
-                            'column_type'               => 'UTF8String',
-                            'subcolumn_type'            => null,
-                            'read_consistency_level'    => 1,
-                            'write_consistency_level'   => 1
-						);
+	'keyspace'		    => 'ProjectOne',
+	'name'			    => 'Users',
+	'supercolumn'		    => false,
+        'column_type'               => 'UTF8String',
+        'subcolumn_type'            => null,
+        'read_consistency_level'    => 1,
+        'write_consistency_level'   => 1
+);
